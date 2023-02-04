@@ -1,0 +1,61 @@
+﻿@page
+@model RazorCoreWebApplication.Pages.Administration.UsersModel
+@{
+
+}
+<div class="container-fluid">
+    <h4>Employee List</h4>
+    <p>
+        <a asp-action="Create" class="btn btn-primary float-end mb-2"><i class="bi bi-person-add"></i> Create Employee</a>
+    </p>
+    <partial name="_DisplayEmployeePartial" model="@Model.UserDetails.Users" view-data="ViewData" />
+</div>
+@section Scripts
+    {
+    <script type="text/javascript">
+        jQueryModalDelete = form => {
+            if (confirm('Are you sure to delete this record ?')) {
+                try {
+                    $.ajax({
+                        type: 'POST',
+                        url: form.action,
+                        data: new FormData(form),
+                        contentType: false,
+                        processData: false,
+                        success: function (res) {
+                            $('#viewAll').html(res.html);
+                        },
+                        error: function (err) {
+                            console.log(err)
+                        }
+                    })
+                } catch (ex) {
+                    console.log(ex)
+                }
+            }
+            return false;
+        }
+        function OnDelete(id) {
+            $.ajax({
+                url: '/Index?handler=Delete',
+                type: "POST",
+                data: { "id": id },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                dataType: "json",
+                success: function (response) {
+                    alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            })
+        }
+    </script>
+}

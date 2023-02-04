@@ -1,0 +1,87 @@
+﻿@page "{EmpId:int?}"
+@model RazorCoreWebApplication.Pages.Employees.DetailsModel
+@{
+    var photoPath = "~/images/" + (Model.EmployeeDetails.Employee.PhotoPath ?? "no-image.png");
+}
+<div class="container-fluid">
+    <h4>Create Employee</h4>
+    <hr />
+    <div class="row">
+        <form method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row mt-2">
+                        <div class="col-md-4">
+                            <input asp-for="@Model.EmployeeDetails.Employee.EmpId" type="hidden" />
+                            <label asp-for="@Model.EmployeeDetails.Employee.EmpName">Employee Name</label>
+                            <input asp-for="@Model.EmployeeDetails.Employee.EmpName" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="@Model.EmployeeDetails.Employee.EmpCode">Employee Code</label>
+                            <input asp-for="@Model.EmployeeDetails.Employee.EmpCode" class="form-control">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label asp-for="@Model.EmployeeDetails.Employee.DepartmentId">Department</label>
+                            <select asp-for="@Model.EmployeeDetails.Employee.DepartmentId"
+                                    asp-items="@(new SelectList(Model.EmployeeDetails.Departments,"DeptId","DeptName"))" class="form-select">
+                                <option selected>Choose...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="form-group col-md-4">
+                            <label asp-for="@Model.EmployeeDetails.Employee.Salary">Salary</label>
+                            <input asp-for="@Model.EmployeeDetails.Employee.Salary" class="form-control" min="0">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="@Model.EmployeeDetails.Employee.Gender">Gender</label>
+                            <br />
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="@Model.EmployeeDetails.Employee.Gender" id="Male" value="male">
+                                    <label asp-for="@Model.EmployeeDetails.Employee.Gender" class="form-check-label" for="Male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="@Model.EmployeeDetails.Employee.Gender" id="Female" value="female">
+                                    <label asp-for="@Model.EmployeeDetails.Employee.Gender" class="form-check-label" for="Female">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="@Model.EmployeeDetails.Employee.AddressType">Address Type</label>
+                            <select asp-for="@Model.EmployeeDetails.Employee.AddressType" class="form-select">
+                                <option selected>Choose...</option>
+                                <option>Current</option>
+                                <option>Permanent</option>                             
+                                <option>Temparary</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="form-group col-md-8">
+                            <label asp-for="@Model.EmployeeDetails.Employee.Address">Address</label>
+                            <textarea asp-for="@Model.EmployeeDetails.Employee.Address" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <button type="submit" class="btn btn-md btn-success mt-3 float-end">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <img src="@photoPath" class="img-thumbnail card-img" asp-append-version="true"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <input asp-for="@Model.EmployeeDetails.Employee.File" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </form>
+    </div>
+</div>

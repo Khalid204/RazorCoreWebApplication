@@ -1,0 +1,81 @@
+﻿@model List<RolesDto>
+
+@*<table class="table table-hover table-bordered">
+    <thead class="bg-secondary text-white">
+        <tr>
+            <th>
+                Emp Name
+            </th>
+            <th>
+                EmpCode
+            </th>
+            <th>
+                Department
+            </th>
+            <th>
+                Salary
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                Address Type
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Is Acitve
+            </th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @Model.Employee.Employees)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+
+                @if (item.IsActive == true)
+                {
+                    <td>
+                        Yes
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        No
+                    </td>
+                }
+                <td>
+                    <a asp-page="/Employees/Details" asp-route-id="@item.EmpId" class="btn btn-primary text-white">Edit</a>
+                    <form method="post" asp-page="Index" asp-route-id="@item.EmpId" asp-page-handler="Delete"
+                      onsubmit="return confirm('Are you sure to delete this record ?')" class="d-inline">
+                        <button type="submit" class="btn btn-danger text-white"> Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>*@
